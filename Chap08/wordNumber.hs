@@ -1,5 +1,10 @@
 -- wordNumber.hs
-module WordNumber where
+module Chap08.WordNumber
+( digitToWord
+, digits
+, wordNumber
+)
+where
 
 import Data.List (intersperse)
 
