@@ -40,3 +40,34 @@ take 2 $ filter odd [1, 3, undefined]
 ```haskell
 take 3 $ filter odd [1, 3, undefined]
 ```
+
+## Intermission
+
+1.  This is definitely normal form.
+```haskell
+[1, 2, 3, 4, 5]
+```
+2.  
+```haskell
+1 : 2 : 3 : 4 : _
+```
+3.  This is WHNF
+```haskell
+enumFromTo 1 10
+```
+4.  
+```haskell
+length [1, 2, 3, 4, 5]
+```
+5.  WHNF
+```haskell
+sum (enumFromTo 1 10)
+```
+6.  WHNF
+```haskell
+['a'..'n'] ++ ['n'..'z']
+```
+7.  
+```haskell
+(_, 'b')
+```
