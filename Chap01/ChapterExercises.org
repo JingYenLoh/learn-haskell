@@ -1,0 +1,17 @@
+#+TITLE: Chapter Exercises
+#+AUTHOR: Jing Yen Loh
+
+* Combinators
+1) $$ \lambda x.xxx $$ - combinator
+2) $$ \lambda xy.zx $$ - not a combinator
+3) $$ \lambda xyz.xy(zx) $$ - combinator
+4) $$ \lambda xyz.xy(zxy) $$ - combinator
+5) $$ \lambda xy.xy(zxy) $$ - not a combinator
+
+* Normal form or diverge?
+1) $$ \lambda x.xxx $$ - already in normal form
+2) $$ (\lambda z.zz)(\lambda y.yy) $$ - diverge
+3) $$ (\lambda x.xxx)z $$ - normal form, reduces to $$ zzz $$
+
+* Beta reduce
+1) 
