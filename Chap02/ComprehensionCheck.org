@@ -1,0 +1,13 @@
+#+TITLE: Comprehension Check
+#+AUTHOR: Jing Yen Loh
+
+1) Use a ~let~ keyword
+2) 
+#+BEGIN_SRC haskell
+areaOfCircle r = 3.14 * r * r
+#+END_SRC
+
+3)
+#+BEGIN_SRC haskell
+areaOfCircle r = pi * r * r
+#+END_SRC
