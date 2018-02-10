@@ -1,0 +1,85 @@
+#+TITLE: Chapter Exercises
+#+AUTHOR: Jing Yen Loh
+
+* Parenthesization
+1. ~2 + (2 * 3) - 1~
+2. ~((^) 10) $ (1 + 1)~
+3. ~(2 ^ 2) * (4 ^ 5) + 1~
+
+* Equivalent expressions
+  1. ~1 + 1~ and ~2~ are equivalent
+  2. ~10 ^ 2~ and ~10 + 9 * 10~ are equivalent
+  3. ~400 - 37~ and ~(-) 37 400~ are different (~(-) 37 400 -- 37 - 400~)
+  4. ~100 `div` 3~ and ~100 / 3~ are different (Integral division vs fractional division)
+  5. ~2 * 5 + 18~ and ~2 * (5 + 18)~ are different (Expression inside parenthesis evaluated first)
+
+* More fun with functions
+#+BEGIN_SRC haskell
+  z     = 7
+  y     = z + 8 -- 15
+  x     = y ^ 2 -- 225
+  waxOn = x * 5 -- 1125
+#+END_SRC
+
+1. 
+#+BEGIN_SRC haskell
+10 + waxOn -- 1135
+#+END_SRC
+
+#+RESULTS:
+: 1135
+
+#+BEGIN_SRC haskell
+(+10) waxOn -- 1135
+#+END_SRC
+
+#+RESULTS:
+: 1135
+
+#+BEGIN_SRC haskell
+(-) 15 waxOn -- -1110
+#+END_SRC
+
+#+RESULTS:
+: -1110
+
+#+BEGIN_SRC haskell
+(-) waxOn 15 -- 1120
+#+END_SRC
+
+2. 
+#+BEGIN_SRC haskell
+triple x = x * 3
+#+END_SRC
+
+3. 
+#+BEGIN_SRC haskell
+triple x = x * 3
+triple waxOn -- 3375
+#+END_SRC
+
+#+RESULTS:
+: 3375
+
+4. 
+#+BEGIN_SRC haskell
+  waxOn' = x * 5
+    where x = y ^ 2
+          y = z + 8
+          z = 7
+#+END_SRC
+
+5. N.A.
+6. 
+#+BEGIN_SRC haskell
+waxOff x = triple x
+#+END_SRC
+
+7. 
+#+BEGIN_SRC haskell
+  waxOff x = triple x
+  waxOff waxOn
+#+END_SRC
+
+#+RESULTS:
+: 3375
