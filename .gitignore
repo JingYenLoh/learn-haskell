@@ -1,2 +1,6 @@
 **/*.png
 **/*.log
+
+# Ignore the PDFs and changelog
+*.pdf
+changelog.md
