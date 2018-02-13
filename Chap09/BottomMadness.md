@@ -43,31 +43,31 @@ take 3 $ filter odd [1, 3, undefined]
 
 ## Intermission
 
-1.  This is definitely normal form.
+1.  This is definitely NF.
 ```haskell
 [1, 2, 3, 4, 5]
 ```
-2.  
+2. WHNF, last `:` is a data constructor that hasn't been fully evaluated
 ```haskell
 1 : 2 : 3 : 4 : _
 ```
-3.  This is WHNF
+3. Neither, outermost part of expression (`enumFromTo`) isn't a data constructor
 ```haskell
 enumFromTo 1 10
 ```
-4.  
+4. Neither, outermost part of expression (`length`) isn't a data constructor
 ```haskell
 length [1, 2, 3, 4, 5]
 ```
-5.  WHNF
+5. Neither, outermost part of expression (`sum`) isn't a data constructor
 ```haskell
 sum (enumFromTo 1 10)
 ```
-6.  WHNF
+6. Neither, outermost part of expression (`++`) isn't a data constructor
 ```haskell
 ['a'..'n'] ++ ['n'..'z']
 ```
-7.  
+7. WHNF
 ```haskell
 (_, 'b')
 ```
