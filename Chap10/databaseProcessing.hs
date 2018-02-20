@@ -36,14 +36,21 @@ filterDbNumber xs = foldr f [] xs
     f (DbNumber i) acc = i : acc
     f _            acc = acc
 
--- TODO: Write a function that gets the most recent date
+-- Write a function that gets the most recent date
 mostRecent :: [DatabaseItem] -> UTCTime
-mostRecent db = foldr max (UTCTime (fromGregorian 0 1 1) 0) $ filterDbDate db
+mostRecent = maximum . filterDbDate
 
 -- Write a function that sums all of the DbNumber values
 sumDb :: [DatabaseItem] -> Integer
 sumDb = sum . filterDbNumber
 
--- TODO: Write a function that gets the average of the DbNumber values
+toDoubles :: [Integer] -> [Double]
+toDoubles = map fromInteger
+
+-- Write a function that gets the average of the DbNumber values
 avgDb :: [DatabaseItem] -> Double
-avgDb = undefined
+avgDb xs = total / count
+    where
+      total     = sum dbNumbers
+      count     = fromIntegral $ length dbNumbers
+      dbNumbers = toDoubles . filterDbNumber $ xs
