@@ -7,7 +7,7 @@ myGreeting = "hello" ++ " world!"
 hello :: String
 hello = "hello"
 
-word :: String
+world :: String
 world = "world!"
 
 main :: IO ()
@@ -15,4 +15,4 @@ main = do
   putStrLn myGreeting
   putStrLn secondGreeting
   where secondGreeting =
-    concat [hello, " ", world]
+          concat [hello, " ", world]

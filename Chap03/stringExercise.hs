@@ -26,5 +26,8 @@ rvrs :: String -> String
 rvrs x = concat [awesome, is, curry]
   where
     awesome = drop 9 x
-    is = concat [ [head $ drop 5 x], [head $ drop 6 x], [head $ drop 7 x], [head $ drop 8 x] ]
+    is = concat [[head $ drop 5 x],
+                 [head $ drop 6 x],
+                 [head $ drop 7 x],
+                 [head $ drop 8 x]]
     curry = take 5 x
