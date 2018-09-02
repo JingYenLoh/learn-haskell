@@ -1,0 +1,14 @@
+#+TITLE: ChapterExercises
+
+* Reading syntax
+ 1. Check correct syntax
+    1. correct
+    2. wrong - infix the ~++~ (~[1, 2, 3] ++ [4, 5, 6]~)
+    3. correct
+    4. wrong - syntax error, close ~"~ (~["hello" ++ " world"]~)
+    5. wrong - switch params (~"hello" !! 4~)
+    6. correct
+    7. wrong - bring 4 out (~take 4 "lovely"~)
+    8. correct
+
+ 2. { a: d, b: c, c: e, d: a, e: b }

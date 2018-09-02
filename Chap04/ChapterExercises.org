@@ -1,0 +1,22 @@
+#+TITLE: ChapterExercises
+
+ 1. ~Foldable t => t a => Int~
+ 2. Results
+    1. 5
+    2. 3
+    3. 2
+    4. 5
+ 3. ~6 / length [1, 2, 3]~ will return an error. ~length [1, 2, 3]~ returns type
+    ~Int~, but ~/~ works on ~Fractional~.
+ 4. Use ~div~, or ~fromIntegral~
+ 5. ~Bool~, ~True~
+ 6. ~Bool~, ~False~
+ 7. Code
+    1. Will work, ~True~
+    2. Won't work, list needs to have same type
+    3. Will work, ~5~
+    4. Will work, ~False~
+    5. Won't work, type mismatch
+ 8. Did it previously
+ 9. Did it previously
+ 10. Did it previously
