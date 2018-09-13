@@ -1,0 +1,126 @@
+#+TITLE: ChapterExercises
+
+* Parametricity
+1. Nope. Can't do it
+
+2. There's 2 ways.
+#+BEGIN_SRC haskell
+-- One possible version
+parametricOne :: a -> a -> a
+parametricOne a _ = a
+
+-- Another possible version
+parametricTwo :: a -> a -> a
+parametricTwo _ a = a
+#+END_SRC
+
+3. One implementation. Nope, parametric polymorphism.
+#+BEGIN_SRC haskell
+foo :: a -> b -> b
+foo _ b = b
+#+END_SRC
+
+* Apply Yourself
+1. ~myConcat :: [Char] -> [Char]~
+2. ~myMult :: (Fractional a) => a -> a~
+3. ~myTake :: Int -> [Char]~
+4. ~myCom :: Int -> Bool~
+5. ~myAlph :: Char -> Bool~
+
+* Multiple choice
+1. A value of type ~[a]~ is a list whose elements are all of some type ~a~.
+2. A function of type ~\[\[\a\]\] -> [a]~ could take a list of strings as an
+   argument.
+3. A function of type ~[a] -> Int -> a~ returns one element of type ~a~ from a
+   list.
+4. A function of type ~(a, b) -> a~ takes a tuple argument and returns the first
+   value.
+
+* Determine the type
+1. Determine the value and type
+   1. ~54~, ~(Num a) => a~
+   2. ~(0, "doge")~, ~(Num a) => (a, [Char])~
+   3. ~False~, ~Bool~
+   4. ~5~, ~Int~
+   5. ~False~, ~Bool~
+
+2. ~(Num a) => a~
+
+3. ~(Num a) => a -> a~
+
+4. ~(Fractional a) => a~
+
+5. ~[Char]~
+
+* Type variable or specific type constructor?
+#+BEGIN_SRC haskell
+f :: Num a => a -> b -> Int -> Int
+#+END_SRC
+constrained polymorphism, fully polymorphic, concrete, concrete
+
+#+BEGIN_SRC haskell
+f :: zed -> Zed -> Blah
+#+END_SRC
+fully polymorphic, concrete, concrete
+
+#+BEGIN_SRC haskell
+f :: Enum b => a -> b -> C
+#+END_SRC
+fully polymorphic, constrained polymorphism, concrete
+
+#+BEGIN_SRC haskell
+f :: f -> g -> C
+#+END_SRC
+fully polymorphic, fully polymorphic, concrete
+
+* Given a type, write the function
+#+BEGIN_SRC haskell
+i :: a -> a
+i a = a
+#+END_SRC
+
+#+BEGIN_SRC haskell
+c :: a -> b -> a
+c a _ = a
+#+END_SRC
+
+#+BEGIN_SRC haskell
+c'' :: b -> a -> b
+c'' b _ = b
+#+END_SRC
+Yep, given alpha equivalence ~c~ and ~c''~ are the same thing.
+
+#+BEGIN_SRC haskell
+c' :: a -> b -> b
+c' _ b = b
+#+END_SRC
+
+#+BEGIN_SRC haskell
+r :: [a] -> [a]
+r = last
+
+-- OR
+
+r' :: [a] -> [a]
+r' = init
+
+-- OR
+
+r'' :: [a] -> [a]
+r'' = id
+#+END_SRC
+
+#+BEGIN_SRC haskell
+co :: (b -> c) -> (a -> b) -> a -> c
+co bToC aToB a = bToC . aToB $ a
+#+END_SRC
+
+#+BEGIN_SRC haskell
+a :: (a -> c) -> a -> a
+a _ x = x
+#+END_SRC
+
+#+BEGIN_SRC haskell
+a' :: (a -> b) -> a -> b
+a' f x = f x
+#+END_SRC

@@ -2,6 +2,9 @@
 
 module DetermineTheType where
 
+-- simple example
+example = 1
+
 -- x = 5
 -- y = x + 5
 -- w = y * 10

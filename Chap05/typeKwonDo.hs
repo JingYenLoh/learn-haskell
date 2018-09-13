@@ -20,7 +20,7 @@ g :: String -> Char
 g = undefined
 
 h :: Int -> Char
-h x = g $ f $ x
+h = g . f
 
 -- 2)
 data A
@@ -36,7 +36,7 @@ w :: B -> C
 w = undefined
 
 e :: A -> C
-e a = w $ q $ a
+e = w . q
 
 -- 3)
 data X
@@ -59,5 +59,4 @@ munge :: (x -> y)
       -> (y -> (w, z))
       -> x
       -> w
-munge xToY yToWZPair x = 
-  fst (yToWZPair $ xToY $ x)
+munge xToY yToWZPair x = fst (yToWZPair $ xToY $ x)
