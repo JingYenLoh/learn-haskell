@@ -32,8 +32,9 @@ data Penguin =
   deriving (Eq, Show)
 
 isSouthAfrica :: WherePenguinsLive -> Bool
-isSouthAfrica SouthAfrica = True
-isSouthAfrica _           = False
+-- isSouthAfrica SouthAfrica = True
+-- isSouthAfrica _           = False
+isSouthAfrica = (== SouthAfrica)
 
 gimmeWhereTheyLive :: Penguin -> WherePenguinsLive
 gimmeWhereTheyLive (Peng whereItLives) = whereItLives

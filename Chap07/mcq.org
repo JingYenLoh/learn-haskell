@@ -24,7 +24,7 @@
 2) =Char -> [String]=\\
 3) =[[String]]=\\
 4) =Char -> String -> [String]=\\
-   My answer: d
+   My answer: b
 
 3. A function =f= has the type =Ord a => a -> a -> Bool= and we apply it
    to one numeric value. What is the type now?\\
@@ -69,7 +69,21 @@ tensDigit x = d
 
 a) First, rewrite it using ~divMod~.
 #+BEGIN_SRC haskell
+-- I'm not quite sure I'm doing it right
 tensDigit :: Integral a => a -> a
+tensDigit x = d
+  where xLast = fst $ x `divMod` 10
+        d     = snd $ xLast `divMod` 10
+#+END_SRC
+
+b) Yes, =divMod= version has same type as original version (Have I misunderstood
+the question o.o).
+
+c)
+#+BEGIN_SRC haskell
+hunsD x = d2
+  where d  = x `div` 100
+        d2 = d `mod` 10
 #+END_SRC
 
 2. Implement the function of the type ~a -> a -> Bool -> a~ once each using a case expression and once
@@ -82,13 +96,13 @@ foldBool = error "Error: Need to implement foldBool!"
 foldBool1 :: a -> a -> Bool -> a
 foldBool1 x y bool =
   case bool of
-    True  -> x
-    False -> y
+    True  -> y
+    False -> x
 
 foldBool2 :: a -> a -> Bool -> a
 foldBool2 x y bool
-  | bool == True  = x
-  | bool == False = y
+  | bool == True  = y
+  | bool == False = x
 
 foldBool3 :: a -> a -> Bool -> a
 foldBool3 x _ False = x
@@ -98,5 +112,5 @@ foldBool3 _ y True  = y
 3. Fill in the definition.
 #+BEGIN_SRC haskell
 g :: (a -> b) -> (a, c) -> (b, c)
-g f (a, b) = (f a, b)
+g f (a, c) = (f a, c)
 #+END_SRC

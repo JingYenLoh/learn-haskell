@@ -2,13 +2,9 @@
 module GrabBag where
 
 -- 1)
--- mTh x y z = x * y * z
--- mTh x y = \z -> x * y * z
--- mTh x = \y -> \z -> x * y * z
-
--- This is Integer -> Integer -> Integer -> Integer
--- o.o
-mTh = \x -> \y -> \z -> x * y * z
+-- It's all the same. Idk how the last one got to
+-- Integer -> Integer -> Integer the last time
+-- I went through this book.
 
 -- 2)
 -- Num a => a -> a -> a
