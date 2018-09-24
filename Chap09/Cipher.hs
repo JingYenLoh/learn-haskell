@@ -21,6 +21,7 @@ unCaesar shift (x:xs) =
     where shifted = ord x - shift
 
 myAnd :: [Bool] -> Bool
+myAnd []     = True
 myAnd (x:xs) = case x of
   False -> False
   True  -> myAnd xs
@@ -41,7 +42,7 @@ myElem :: Eq a => a -> [a] -> Bool
 myElem _ []     = False
 myElem x (y:ys) = if x == y
                   then True
-                  else myElem x ys
+                  else x `myElem` ys
 
 myElem' :: Eq a => a -> [a] -> Bool
 myElem' x xs = myAny (==x) xs

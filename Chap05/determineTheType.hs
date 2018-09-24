@@ -50,4 +50,5 @@ myFunc :: (x -> y)
        -> c
        -> (a, x)
        -> (a, z)
-myFunc xToY yToZ _ (a, x) = (a, yToZ $ (xToY x))
+myFunc xToY yToZ _ (a, x) = (a, xToZ x)
+  where xToZ = yToZ . xToY
