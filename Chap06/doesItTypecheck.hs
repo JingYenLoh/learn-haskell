@@ -45,10 +45,10 @@ data Papu =
   deriving (Eq, Show)
 
 -- 1. Does not typecheck
-phew = Papu "chases" True
+-- phew = Papu "chases" True
 
 -- 2. typechecks
-phew = Papu (Rocks "chomskydoz")
+truth = Papu (Rocks "chomskydoz")
             (Yeah True)
 
 -- 3. typechecks, deriving Eq
