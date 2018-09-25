@@ -29,7 +29,8 @@ digits n = go n []
               where (a, b) = x `divMod` 10
 
 wordNumber :: Int -> String
-wordNumber n = concat $ intersperse "-" (map digitToWord (digits n))
+-- wordNumber n = concat $ intersperse "-" (map digitToWord (digits n))
+wordNumber = concat . intersperse "-" . (map digitToWord) . digits
 
 main :: IO ()
 main = do
