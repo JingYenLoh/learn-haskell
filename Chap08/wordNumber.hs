@@ -24,7 +24,7 @@ digitToWord _ = "undefined"
 digits :: Int -> [Int]
 digits n = go n []
   where go x xs
-          | x <  10 = x:xs 
+          | x < 10    = x:xs
           | otherwise = go a (b:xs)
               where (a, b) = x `divMod` 10
 
