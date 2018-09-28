@@ -1,7 +1,7 @@
 -- poemLines.hs
 module PoemLines where
 
-import Chap09.ThyFearfulSymmetry (myTokens)
+-- import Chap09.ThyFearfulSymmetry (myTokens)
 
 sentences :: String
 sentences = firstSen ++ secondSen
@@ -13,7 +13,11 @@ sentences = firstSen ++ secondSen
           fourthSen = "Could frame thy fearful symmetry?"
 
 myLines :: String -> [String]
-myLines = myTokens '\n'
+myLines ""  = []
+myLines str = line str : (myLines $ lines str)
+  where line  = takeWhile (/= '\n')
+        lines = drop 1 . dropWhile (/='\n')
+
 
 shouldEqual :: [String]
 shouldEqual =

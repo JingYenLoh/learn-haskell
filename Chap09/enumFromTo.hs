@@ -28,9 +28,7 @@ eftChar start end = go start end []
 
 main :: IO ()
 main = do
-  putStrLn $ if (eftBool bool1 bool2) == [bool1..bool2]
-             then "True"
-             else "False"
+  putStrLn . show $ (eftBool bool1 bool2) == [bool1..bool2]
   where
     bool1 = False
     bool2 = True
