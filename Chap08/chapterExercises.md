@@ -56,9 +56,7 @@ go 15 2 0
 ```haskell
 mySum :: (Eq a, Num a) => a -> a
 mySum n
-  | n <  1    = error $ "***Exception: "
-                     ++ "argument should not be smaller than 1."
-  | n == 1    = 1
+  | n <= 0    = 0
   | otherwise = n + mySum (n - 1)
 ```
 
@@ -76,6 +74,6 @@ myMult x y = go x y x
 
 ```hs
 mc91 n
-  | n >  100  = n - 10
+  | n > 100   = n - 10
   | otherwise = mc91 . mc91 $ n + 11
 ```
