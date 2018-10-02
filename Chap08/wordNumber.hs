@@ -1,4 +1,5 @@
 -- wordNumber.hs
+
 module Chap08.WordNumber
 ( digitToWord
 , digits

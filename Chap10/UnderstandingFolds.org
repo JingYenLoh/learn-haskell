@@ -16,11 +16,11 @@
 4. Folds are catamorphisms, which means they are generally used to reduce structure
 5. The following are simple folds very similar to what you've already seen, but each has at least one error. Please fix them and text in your REPL:
    1) ~foldr (++) "" ["woot", "WOOT", "woot"]~
-   2) ~foldr max ' ' "fear is the little death"~
+   2) ~foldr max '\NUL' "fear is the little death"~
    3) ~foldr (&&) True [False, True]~
    4) No
    5) ~foldl (flip ((++) . show)) "" [1..5]~
-   6) ~foldl const 'a' [1..5]~
+   6) ~foldl const 'a' [1..5]~ or ~foldr (flip const) 'a' [1..5]~
    7) ~foldl const 0 "tacos"~
    8) ~foldl const 0 "burritos"~
    9) ~foldr (flip const) 'z' [1..5]~

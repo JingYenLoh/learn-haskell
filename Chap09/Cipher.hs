@@ -45,11 +45,16 @@ myElem x (y:ys) = if x == y
                   else x `myElem` ys
 
 myElem' :: Eq a => a -> [a] -> Bool
-myElem' x xs = myAny (==x) xs
+myElem' = myAny . (==)
 
 myReverse :: [a] -> [a]
 myReverse []     = []
 myReverse (x:xs) = myReverse xs ++ [x]
+
+myReverse' :: [a] -> [a]
+myReverse' = go []
+  where go acc []     = acc
+        go acc (x:xs) = go (x:acc) xs
 
 squish :: [[a]] -> [a]
 squish []     = []
@@ -60,7 +65,7 @@ squishMap _ []     = []
 squishMap f (x:xs) = f x ++ squishMap f xs
 
 squishAgain :: [[a]] -> [a]
-squishAgain = squishMap (id)
+squishAgain = squishMap id
 
 myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
 myMaximumBy f (x:x':xs) =
@@ -75,3 +80,9 @@ myMinimumBy f (x:x':xs) =
     LT -> myMinimumBy f (x:xs)
     _  -> myMinimumBy f (x':xs)
 myMinimumBy _ (x:_) = x
+
+myMaximum :: (Ord a) => [a] -> a
+myMaximum = myMaximumBy compare
+
+myMinimum :: (Ord a) => [a] -> a
+myMinimum = myMinimumBy compare

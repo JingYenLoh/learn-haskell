@@ -7,7 +7,9 @@ multiplesCount :: Int
 multiplesCount = length $ multiplesOfThree
 
 myFilter :: String -> [String]
-myFilter str = filter f tokens
-  where f        = (\w -> not $ w `elem` articles)
-        tokens   = words str
-        articles = ["the", "a", "an"]
+-- myFilter str = filter f tokens
+--   where f        = (\w -> not $ w `elem` articles)
+--         tokens   = words str
+--         articles = ["the", "a", "an"]
+myFilter = filter (not . (`elem` articles)) . words
+  where articles = ["the", "a", "an"]

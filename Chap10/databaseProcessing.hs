@@ -23,7 +23,7 @@ theDatabase =
 -- Write a function that filters for DbDate values and returns a list of the
 -- UTCTime values inside them
 filterDbDate :: [DatabaseItem] -> [UTCTime]
-filterDbDate xs = foldr f [] xs
+filterDbDate = foldr f []
   where
     f (DbDate time) acc = time : acc
     f _             acc = acc
@@ -31,7 +31,7 @@ filterDbDate xs = foldr f [] xs
 -- Write a function that filters for DbNumber values and returns a list of the
 -- Integer values inside them
 filterDbNumber :: [DatabaseItem] -> [Integer]
-filterDbNumber xs = foldr f [] xs
+filterDbNumber = foldr f []
   where
     f (DbNumber i) acc = i : acc
     f _            acc = acc
