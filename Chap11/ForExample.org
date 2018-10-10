@@ -1,0 +1,13 @@
+#+TITLE: ForExample
+
+#+BEGIN_SRC haskell
+data Example = MakeExample deriving Show
+#+END_SRC
+
+#+BEGIN_SRC haskell
+data Example' = MakeExample' Int deriving Show
+#+END_SRC
+
+1. The type of ~MakeExample~ is ~Example~.
+2. Yep, you can see what typeclass instances are defined.
+3. ~Int -> Example~
