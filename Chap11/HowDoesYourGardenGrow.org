@@ -1,0 +1,11 @@
+#+TITLE: How Does Your Garden Grow?
+
+#+BEGIN_SRC haskell
+type Gardener = String
+
+data Garden = Gardenia Gardener
+            | Daisy Gardener
+            | Rose Gardener
+            | Lilac Gardener
+            deriving Show
+#+END_SRC
