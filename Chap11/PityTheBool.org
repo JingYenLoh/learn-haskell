@@ -1,0 +1,33 @@
+#+TITLE: Exercises: Pity the Bool
+
+#+BEGIN_SRC haskell
+data BigSmall =
+    Big Bool
+  | Small Bool
+  deriving (Eq, Show)
+#+END_SRC
+
+~BigSmall~ has a cardinality of 4.
+
+#+BEGIN_SRC haskell
+-- bring Int8 in scope
+import Data.Int
+
+data NumberOrBool =
+    Numba Int8
+  | BoolyBool Bool
+  deriving (Eq, Show)
+
+-- parentheses due to syntactic
+-- collision between (-) minus
+-- and the negate function
+let myNumba = Numba (-128)
+#+END_SRC
+
+Cardinality of ~NumberOrBool~ is 258 (256 + 2). GHCi screams the following when
+you try to create a ~Numba~ with a numberic literal larger than 127:
+#+BEGIN_SRC sh
+warning: [-Woverflowed-literals]
+    Literal 128 is out of the Int8 range -128..127
+#+END_SRC
+Similar warning for numeric literal smaller than (-128).
