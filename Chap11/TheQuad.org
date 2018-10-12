@@ -1,0 +1,41 @@
+#+TITLE: The Quad
+
+#+BEGIN_SRC haskell
+data Quad =
+    One
+  | Two
+  | Three
+  | Four
+  deriving (Eq, Show)
+#+END_SRC
+
+#+BEGIN_SRC haskell
+eQuad :: Either Quad Quad
+eQuad = undefined
+#+END_SRC
+~eQuad~ can take 8 different forms (2 * 4).
+
+#+BEGIN_SRC haskell
+prodQuad :: (Quad, Quad)
+#+END_SRC
+~prodQuad~ can take 16 different forms (4 * 4).
+
+#+BEGIN_SRC haskell
+funcQuad :: Quad -> Quad
+#+END_SRC
+~funcQuad~ can take 256 different forms (4 ^ 4).
+
+#+BEGIN_SRC haskell
+prodTBool :: (Bool, Bool, Bool)
+#+END_SRC
+~prodTBool~ can take 8 different forms (2 * 2 * 2).
+
+#+BEGIN_SRC haskell
+gTwo :: Bool -> Bool -> Bool
+#+END_SRC
+~gTwo~ can take 16 different forms ((2 ^ 2) ^ 2).
+
+#+BEGIN_SRC haskell
+fTwo :: Bool -> Quad -> Quad
+#+END_SRC
+~fTwo~ can take 65536 different forms ((4 ^ 4) ^ 2).
