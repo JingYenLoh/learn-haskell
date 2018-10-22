@@ -37,3 +37,57 @@ data Quantum =
 -- convert8 No = False
 -- convert8 Both = False
 #+END_SRC
+
+* Multiple Choice
+Given the following datatype:
+#+BEGIN_SRC haskell
+data Weekday =
+    Monday
+  | Tuesday
+  | Wednesday
+  | Thursday
+  | Friday
+#+END_SRC
+we can say: ~Weekday~ is a type with 5 data constructors
+
+and with the same datatype definition in mind, what is the type of the following
+function, ~f~?
+#+BEGIN_SRC haskell
+f Friday = "Miller Time"
+#+END_SRC
+~f :: Weekday -> String~
+
+Types defined with the ~data~ keyword must begin with a capital letter.
+
+The function ~g xs = xs !! (length xs - 1)~ delivers the final element of ~xs~
+
+
+* Ciphers
+Refer to ~Chap09/Cipher.hs~.
+
+
+* As-patterns
+#+BEGIN_SRC haskell
+isSubseqOf :: (Eq a)
+           => [a]
+           -> [a]
+           -> Bool
+#+END_SRC
+
+#+BEGIN_SRC haskell
+capitalizeWords :: String -> [(String, String)]
+#+END_SRC
+
+* Language exercises
+Write a function that capitalizes a word.
+#+BEGIN_SRC haskell
+capitalizeWord :: String -> String
+capitalizeWord ""  = ""
+capitalizeWord (x:xs) = toUpper x : xs
+#+END_SRC
+
+Write a function that capitalizes sentences in a paragraph.
+#+BEGIN_SRC haskell
+capitalizeParagraph :: String -> String
+capitalizeParagraph = undefined
+#+END_SRC
