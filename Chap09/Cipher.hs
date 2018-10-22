@@ -5,12 +5,47 @@ module Cipher
 
 import Data.Char
 
+main :: IO ()
+main = do
+  if msg == "MPPR AE OYWY"
+  then putStrLn "vigenere passed"
+  else putStrLn msg
+  where msg = vigenere testKeyword testMessage
+
+
+type Message = String
+type Keyword = String
+
+testKeyword :: Keyword
+testKeyword = "ALLY"
+
+
+testMessage :: Message
+testMessage = "meet at dawn"
+
+
+vigenere :: Keyword -> Message -> String
+vigenere _ "" = ""
+vigenere (k:ks) (c:cs)
+  | isAlpha c = shifted:(vigenere (ks ++ [k]) cs)
+  | otherwise = c:(vigenere (k:ks) cs)
+  where
+    shifted = head (caesar shift [c])
+    shift =  (ord k) `mod` 65
+
+
 caesar :: Int -> String -> String
 caesar _ ""         = ""
-caesar shift (x:xs) =
-  case shift + ord x > 122 of
-    False -> chr (shift + ord x) : caesar shift xs
-    True  -> chr (shift - 74 + ord x) : caesar shift xs
+caesar shift (x:xs)
+  | isAlpha x = shifted : caesar shift xs
+  | otherwise = x : caesar shift xs
+  where shifted =
+          if charToShift > 90
+          then chr $ ((charToShift - 65) `mod` 26) + 65
+          else chr charToShift
+        c = toUpper x
+        charToShift = shift + ord c
+
 
 unCaesar :: Int -> String -> String
 unCaesar _ ""         = ""
