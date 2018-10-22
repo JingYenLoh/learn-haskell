@@ -61,21 +61,20 @@ Types defined with the ~data~ keyword must begin with a capital letter.
 
 The function ~g xs = xs !! (length xs - 1)~ delivers the final element of ~xs~
 
-
 * Ciphers
 Refer to ~Chap09/Cipher.hs~.
 
-
 * As-patterns
 #+BEGIN_SRC haskell
-isSubseqOf :: (Eq a)
-           => [a]
-           -> [a]
-           -> Bool
+isSubseqOf :: (Eq a) => [a] -> [a] -> Bool
+isSubseqOf [] _ = True
+isSubseqOf _ [] = False
+isSubseqOf seq@(x:xs) (y:ys) = isSubseqOf (if x == y then xs else seq) ys
 #+END_SRC
 
 #+BEGIN_SRC haskell
 capitalizeWords :: String -> [(String, String)]
+capitalizeWords xs = map (\w@(c:cs) -> (w, toUpper c : cs)) $ words xs
 #+END_SRC
 
 * Language exercises
