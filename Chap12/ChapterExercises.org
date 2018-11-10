@@ -1,0 +1,59 @@
+#+TITLE: Chapter Exercises
+
+* Determine the kinds
+
+Given
+#+BEGIN_SRC haskell
+id :: a -> a
+#+END_SRC
+The kind of ~a~ is ~*~.
+
+Given
+#+BEGIN_SRC haskell
+r :: a -> f a
+#+END_SRC
+The kind of ~a~ is ~*~.
+The kind of ~f~ is ~* -> *~.
+
+* String processing
+#+BEGIN_SRC haskell
+import Data.List
+
+notThe :: String -> Maybe String
+notThe str = if str /= "the"
+  then Just str
+  else Nothing
+
+replaceThe :: String -> String
+replaceThe = unwords . fmap f . words
+  where f xs = case notThe xs of
+          (Just str) -> str
+          Nothing    -> "a"
+#+END_SRC
+
+#+BEGIN_SRC haskell
+countTheBeforeVowel :: String -> Integer
+countTheBeforeVowel = undefined
+#+END_SRC
+
+#+BEGIN_SRC haskell
+countVowels :: String -> Integer
+countVowels = undefined
+#+END_SRC
+
+* It's only Natural
+* Small library for Maybe
+#+BEGIN_SRC haskell
+isJust :: Maybe a -> Bool
+isJust Nothing  = False
+isJust _        = True
+
+isNothing :: Maybe a -> Bool
+isNothing Nothing  = True
+isNothing _        = False
+#+END_SRC
+
+#+BEGIN_SRC haskell
+mayybee :: b -> (a -> b) -> Maybe a -> b
+mayybee = undefined
+#+END_SRC
