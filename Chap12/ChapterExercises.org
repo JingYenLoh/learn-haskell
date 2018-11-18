@@ -37,11 +37,55 @@ countTheBeforeVowel = undefined
 #+END_SRC
 
 #+BEGIN_SRC haskell
+isVowel :: Char -> Bool
+isVowel = (`elem` "aeiou")
+
 countVowels :: String -> Integer
-countVowels = undefined
+countVowels str = go str 0 where
+  go "" acc = acc
+  go (x:xs) acc = if isVowel x then go xs (acc + 1) else go xs acc
+#+END_SRC
+
+* Validate the word
+A little messy but brain isn't really functioning now.
+#+BEGIN_SRC haskell
+newtype Word' =
+  Word' String
+  deriving (Eq, Show)
+
+vowels = "aeiou"
+
+mkWord :: String -> Maybe Word'
+mkWord str = go str 0 0 where
+  go ""     v c = if v > c then Nothing else (Just $ Word' str)
+  go (x:xs) v c = if x `elem` vowels
+                  then go xs (v + 1) c
+                  else go xs v (c + 1)
 #+END_SRC
 
 * It's only Natural
+#+BEGIN_SRC haskell
+-- As natural as any
+-- competitive bodybuilder
+data Nat =
+    Zero
+  | Succ Nat
+  deriving (Eq, Show)
+
+natToInteger :: Nat -> Integer
+natToInteger n = go n 0 where
+  go Zero acc = acc
+  go (Succ x) acc = go x (acc + 1)
+
+
+integerToNat :: Integer -> Maybe Nat
+integerToNat i
+  | i < 0     = Nothing
+  | otherwise = go i Zero where
+      go 0 (acc) = Just acc
+      go n (acc) = go (n - 1) (Succ acc)
+#+END_SRC
+
 * Small library for Maybe
 #+BEGIN_SRC haskell
 isJust :: Maybe a -> Bool
