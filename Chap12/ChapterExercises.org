@@ -89,15 +89,139 @@ integerToNat i
 * Small library for Maybe
 #+BEGIN_SRC haskell
 isJust :: Maybe a -> Bool
-isJust Nothing  = False
-isJust _        = True
+isJust Nothing = False
+isJust _       = True
 
 isNothing :: Maybe a -> Bool
-isNothing Nothing  = True
-isNothing _        = False
+isNothing Nothing = True
+isNothing _       = False
 #+END_SRC
 
 #+BEGIN_SRC haskell
 mayybee :: b -> (a -> b) -> Maybe a -> b
-mayybee = undefined
+mayybee b _ Nothing = b
+mayybee _ f (Just a) = f a
+#+END_SRC
+
+#+BEGIN_SRC haskell
+fromMaybe :: a -> Maybe a -> a
+fromMaybe a Nothing = a
+fromMaybe _ (Just a ) = a
+#+END_SRC
+
+#+BEGIN_SRC haskell
+listToMaybe :: [a] -> Maybe a
+listToMaybe []    = Nothing
+listToMaybe (x:_) = Just x
+#+END_SRC
+
+#+BEGIN_SRC haskell
+maybeToList :: Maybe a -> [a]
+maybeToList = mayybee [] (\x -> [x])
+#+END_SRC
+
+#+BEGIN_SRC haskell
+catMaybes :: [Maybe a] -> [a]
+catMaybes xs = go xs [] where
+  go [] acc = acc
+  go (y:ys) acc = case y of
+    Nothing -> go ys acc
+    Just a  -> go ys (a:acc)
+#+END_SRC
+
+#+BEGIN_SRC haskell
+fipMaybe :: [Maybe a] -> Maybe [a]
+fipMaybe xs = go xs [] where
+  go [] acc = Just acc
+  go (y:ys) acc = case y of
+    Nothing -> Nothing
+    Just a  -> go ys (a:acc)
+#+END_SRC
+
+* Small library for Either
+#+BEGIN_SRC haskell
+lefts' :: [Either a b] -> [a]
+lefts' = foldr f [] where
+  f (Left a)  acc = a:acc
+  f (Right _) acc = acc
+#+END_SRC
+
+#+BEGIN_SRC haskell
+rights' :: [Either a b] -> [b]
+rights' = foldr f [] where
+  f (Left _)  acc = acc
+  f (Right a) acc = a:acc
+#+END_SRC
+
+#+BEGIN_SRC haskell
+partitionEither :: [Either a b] -> ([a], [b])
+partitionEither xs = go xs ([], []) where
+  go [] partition    = partition
+  go (y:ys) (as, bs) = case y of
+    Left a -> go ys (a:as, bs)
+    Right b -> go ys (as, b:bs)
+#+END_SRC
+
+#+BEGIN_SRC haskell
+eitherMaybe' :: (b -> c)
+             -> Either a b
+             -> Maybe c
+eitherMaybe' _ (Left a)  = Nothing
+eitherMaybe' f (Right b) = Just $ f b
+#+END_SRC
+
+#+BEGIN_SRC haskell
+either' :: (a -> c)
+        -> (b -> c)
+        -> Either a b
+        -> c
+either' f g x = case x of
+  Left a  -> f a
+  Right b -> g b
+#+END_SRC
+
+#+BEGIN_SRC haskell
+eitherMaybe'' :: (b -> c)
+              -> Either a b
+              -> Maybe c
+eitherMaybe'' f = either' (\_ -> Nothing) (Just . f)
+#+END_SRC
+
+* Write your own iterate and unfoldr
+#+BEGIN_SRC haskell
+myIterate :: (a -> a) -> a -> [a]
+myIterate f a = a : myIterate f (f a)
+#+END_SRC
+
+#+BEGIN_SRC haskell
+myUnfoldr :: (b -> Maybe (a, b))
+          -> b
+          -> [a]
+myUnfoldr = undefined
+#+END_SRC
+
+#+BEGIN_SRC haskell
+betterIterate :: (a -> a) -> a -> [a]
+betterIterate f x = myUnfoldr (\x' -> Just $ (x', f x')) x
+#+END_SRC
+
+* Finally something other than a list!
+#+BEGIN_SRC haskell
+data BinaryTree a = Leaf
+                  | Node (BinaryTree a) a (BinaryTree a)
+                  deriving (Eq, Ord, Show)
+
+unfold :: (a -> Maybe (a,b,a))
+       -> a
+       -> BinaryTree b
+unfold f x = case f x of
+  Nothing -> Leaf
+  Just (a, b, c) -> Node (unfold f a) b (unfold f c)
+
+
+treeBuild :: Integer -> BinaryTree Integer
+treeBuild n = unfold f 0 where
+  f x = if x == n
+        then Nothing
+        else Just (x + 1, x, x + 1)
 #+END_SRC
