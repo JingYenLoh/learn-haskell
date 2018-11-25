@@ -1,6 +1,10 @@
 **/*.png
 **/*.log
 
+# Haskell stuff
+**/*.hi
+**/*.o
+
 # Ignore the PDFs and changelog
 *.pdf
 changelog.md
