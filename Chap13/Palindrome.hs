@@ -13,4 +13,4 @@ palindrome = forever $ do
     False -> putStrLn "Nope!"
     where
       cleanLine :: String -> String
-      cleanLine xs = filter (`elem` ['a'..'z']) $ fmap toLower $ xs
+      cleanLine xs = [toLower x | x <- xs, x `elem` ['a'..'z']]
