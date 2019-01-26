@@ -1,6 +1,6 @@
 module Lib where
 
-import Data.List (intersperse, sort)
+import Data.List (intersperse)
 
 digitToWord :: Int -> String
 digitToWord 0 = "zero"
@@ -25,8 +25,10 @@ digits n = go n []
 wordNumber :: Int -> String
 wordNumber = concat . intersperse "-" . (map digitToWord) . digits
 
+half :: Double -> Double
 half x = x / 2
 
+halfIdentity :: Double -> Double
 halfIdentity = (*2) . half
 
 listOrdered :: (Ord a) => [a] -> Bool
@@ -36,6 +38,6 @@ listOrdered xs =
         go y (Nothing, t) = (Just y, t)
         go y (Just x, t)  = (Just y, x >= y)
 
-plusAssociative x y z = x + (y + z) == (x + y) + z
-
-plusCommutative x y = x + y == y + x
+data Fool = Fulse
+          | Frue
+          deriving (Eq, Show)

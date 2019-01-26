@@ -19,6 +19,7 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 - hspec
+- QuickCheck
 
 library:
   source-dirs: src
@@ -45,3 +46,4 @@ tests:
     dependencies:
     - wordnumber
     - hspec
+    - QuickCheck
