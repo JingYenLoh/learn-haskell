@@ -8,7 +8,7 @@ data Optional a = Nada
                 | Only a
                 deriving (Eq, Show)
 
-instance Monoid a => Semigroup (Optional a) where
+instance Semigroup a => Semigroup (Optional a) where
   (<>) (Only x) (Only y) = Only $ x <> y
   (<>) (Only x) _        = Only x
   (<>) _        (Only y) = Only y
