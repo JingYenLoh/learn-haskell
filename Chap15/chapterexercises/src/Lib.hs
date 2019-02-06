@@ -148,7 +148,7 @@ instance (Semigroup b) => Semigroup (Combine a b) where
 instance (Semigroup b, Monoid b) => Monoid (Combine a b) where
   mempty = Combine mempty
 
--- Comp
+-- TODO: Comp
 newtype Comp a =
   Comp { unComp :: a -> a }
 
@@ -169,7 +169,7 @@ instance Semigroup a => Semigroup (Validation a b) where
   _           <> Success' a  = Success' a
   Failure' a  <> Failure' b  = Failure' (a <> b)
 
--- Mem
+-- TODO: Mem
 newtype Mem s a =
   Mem { runMem :: s -> (a, s)
       }
