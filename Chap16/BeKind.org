@@ -1,0 +1,14 @@
+#+TITLE: Exercises: Be Kind
+
+#+BEGIN_SRC haskell
+f :: a -> a
+#+END_SRC
+
+The kind of ~a~ is ~*~.
+
+#+BEGIN_SRC haskell
+f :: a -> b a -> T (b a)
+#+END_SRC
+
+The kind of ~b~ is ~* -> *~.
+The kind of ~T~ is ~* -> *~.
