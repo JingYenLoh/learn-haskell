@@ -2,8 +2,6 @@
 
 module Chap15.OptionalMonoid where
 
-import Data.Semigroup
-
 data Optional a = Nada
                 | Only a
                 deriving (Eq, Show)
