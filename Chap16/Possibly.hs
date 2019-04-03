@@ -1,4 +1,4 @@
-module Possibly where
+module Chap16.Possibly where
 
 data Possibly a = LolNope
                 | Yeppers a
