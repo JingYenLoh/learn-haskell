@@ -7,7 +7,7 @@ instance Functor Identity where
   fmap f (Identity a) = Identity (f a)
 
 instance Applicative Identity where
-  pure a = Identity a
+  pure = Identity
   (Identity f) <*> (Identity a) = Identity (f a)
 
 newtype Constant a b =
