@@ -11,12 +11,27 @@ instance Functor List where
   fmap f Nil = Nil
   fmap f (Cons x xs) = Cons (f x) (fmap f xs)
 
--- TODO: Fix
 instance Applicative List where
   pure a = Cons a Nil
   Nil <*> _ = Nil
   _ <*> Nil = Nil
   (Cons f fs) <*> xs = append (f <$> xs) (fs <*> xs)
+newtype ZipList' a = ZipList' (List a)
+                   deriving (Eq, Show)
+
+instance Functor ZipList' where
+  fmap f (ZipList' xs) = ZipList' $ fmap f xs
+
+instance Applicative (ZipList') where
+  pure a = ZipList' $ pure a
+  _ <*> ZipList' Nil = ZipList' Nil
+  ZipList' Nil <*> _ = ZipList' Nil
+  (ZipList' (Cons f Nil)) <*> (ZipList' (Cons x xs)) =
+    ZipList' $ Cons (f x) (f <$> xs)
+  (ZipList' (Cons f fs)) <*> (ZipList' (Cons x Nil)) =
+    ZipList' $ Cons (f x) (f <$> pure x)
+  (ZipList' (Cons f fs)) <*> (ZipList' (Cons x xs)) =
+    ZipList' $ Cons (f x) (fs <*> xs)
 
 append :: List a -> List a -> List a
 append Nil ys = ys
@@ -34,15 +49,6 @@ flatMap :: (a -> List b)
         -> List b
 flatMap f as = concat' $ fmap f as
 
-take' :: Int -> List a -> List a
-take' n xs = go n xs Nil where
-  go _ Nil acc = acc
-  go 0 _   acc = acc
-  go n (Cons x' xs') acc = go (n-1) xs' (Cons x' acc)
-
-newtype ZipList' a = ZipList' (List a)
-                   deriving (Eq, Show)
-
 toMyList :: [a] -> List a
 toMyList [] = Nil
 toMyList (x:xs) = Cons x $ toMyList xs
@@ -51,17 +57,6 @@ zipWith' :: (a -> b -> c) -> List a -> List b -> List c
 zipWith' _ Nil _ = Nil
 zipWith' _ _ Nil = Nil
 zipWith' f (Cons a as) (Cons b bs) = Cons (f a b) (zipWith' f as bs)
-
-instance Functor ZipList' where
-  fmap f (ZipList' xs) =
-    ZipList' $ f <$> xs
-
-instance Applicative ZipList' where
-  pure a = ZipList' (Cons a Nil)
-  (ZipList' a) <*> (ZipList' Nil) = ZipList' Nil
-  (ZipList' Nil) <*> (ZipList' _) = ZipList' Nil
-  (ZipList' (Cons x xs)) <*> (ZipList' (Cons y ys)) =
-    ZipList' $ Cons (x y) (zipWith' ($) xs ys)
 
 data Validation e a = Failure e
                     | Success a
@@ -77,3 +72,4 @@ instance (Monoid e) => Applicative (Validation e) where
   (Failure e) <*> (Failure f) = Failure $ e <> f
   (Failure e) <*> (Success _) = Failure e
   (Success _) <*> (Failure e) = Failure e
+

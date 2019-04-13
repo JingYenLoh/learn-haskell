@@ -16,13 +16,18 @@ instance Arbitrary a => Arbitrary (List a) where
     elements [ Cons a (Cons b Nil)
              , Nil]
 
-zipListGen :: Arbitrary a => Gen (ZipList' a)
-zipListGen = do
-  a <- arbitrary
-  return (ZipList' a)
+instance Eq a => EqProp (List a) where
+  (=-=) = eq
+
+take' :: Int -> List a -> List a
+take' 0 _ = Nil
+take' _ Nil = Nil
+take' n (Cons x xs) = Cons x (take' (n-1) xs)
 
 instance Arbitrary a => Arbitrary (ZipList' a) where
-  arbitrary = zipListGen
+  arbitrary = do
+  a <- arbitrary
+  return (ZipList' a)
 
 instance Eq a => EqProp (ZipList' a) where
   xs =-= ys = xs' `eq` ys'
