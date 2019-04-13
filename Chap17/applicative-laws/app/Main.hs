@@ -111,6 +111,7 @@ combos = liftA3 (,,)
 
 main :: IO ()
 main = do
+  quickBatch (applicative $ Cons ("a", "b", "c") Nil)
   quickBatch (applicative $ ZipList' (Cons ([1 :: Int], "a", 'c') Nil))
   quickBatch (applicative $ (undefined :: Validation [String] (String, String, String)))
 

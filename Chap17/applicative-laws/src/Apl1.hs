@@ -8,14 +8,15 @@ data List a = Nil
             deriving (Eq, Show)
 
 instance Functor List where
-  fmap f Nil = Nil
-  fmap f (Cons x xs) = Cons (f x) (fmap f xs)
+  fmap _ Nil = Nil
+  fmap f (Cons x xs) = Cons (f x) (f <$> xs)
 
 instance Applicative List where
   pure a = Cons a Nil
   Nil <*> _ = Nil
   _ <*> Nil = Nil
-  (Cons f fs) <*> xs = append (f <$> xs) (fs <*> xs)
+  Cons f fs <*> xs = append (f <$> xs) (fs <*> xs)
+
 newtype ZipList' a = ZipList' (List a)
                    deriving (Eq, Show)
 
