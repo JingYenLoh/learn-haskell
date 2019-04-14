@@ -1,6 +1,6 @@
 module Chap18.Scratch where
 
-import Control.Monad (join)
+import Control.Monad
 import Data.List
 
 -- join :: Monad m => m (m a) -> m a
@@ -165,3 +165,46 @@ doSomething' n = do
   b <- g a
   c <- h b
   pure (a, b, c)
+
+sayHi :: String -> IO String
+sayHi greeting = do
+  putStrLn greeting
+  getLine
+
+sayHi' :: String -> IO String
+sayHi' s = putStrLn s >> getLine
+
+readM :: Read a => String -> IO a
+readM = return . read
+
+getAge :: String -> IO Int
+getAge = sayHi >=> readM
+
+askForAge :: IO Int
+askForAge =
+  getAge "Hello! How old are you?"
+
+j :: Monad m => m (m a) -> m a
+j = join
+
+l1 :: Monad m => (a -> b) -> m a -> m b
+l1 = fmap
+
+l2 :: Monad m
+   => (a -> b -> c) -> m a -> m b -> m c
+l2 = liftM2
+
+a :: Monad m => m a -> m (a -> b) -> m b
+a = flip (<*>)
+
+-- Do notation simplifies
+meh :: Monad m
+    => [a] -> (a -> m b) -> m [b]
+meh [] _ = return []
+meh (a:as) f = do
+  a' <- f a
+  as' <- meh as f
+  return $ a':as'
+
+flipType :: Monad m => [m a] -> m [a]
+flipType = flip meh id
