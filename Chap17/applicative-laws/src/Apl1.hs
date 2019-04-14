@@ -23,7 +23,7 @@ newtype ZipList' a = ZipList' (List a)
 instance Functor ZipList' where
   fmap f (ZipList' xs) = ZipList' $ fmap f xs
 
-instance Applicative (ZipList') where
+instance Applicative ZipList' where
   pure a = ZipList' $ pure a
   _ <*> ZipList' Nil = ZipList' Nil
   ZipList' Nil <*> _ = ZipList' Nil
@@ -51,8 +51,7 @@ flatMap :: (a -> List b)
 flatMap f as = concat' $ fmap f as
 
 toMyList :: [a] -> List a
-toMyList [] = Nil
-toMyList (x:xs) = Cons x $ toMyList xs
+toMyList = foldr Cons Nil
 
 zipWith' :: (a -> b -> c) -> List a -> List b -> List c
 zipWith' _ Nil _ = Nil
