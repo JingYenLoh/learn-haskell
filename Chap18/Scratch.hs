@@ -141,7 +141,7 @@ mkSphericalCow''' :: String
                   -> Int
                   -> Maybe Cow
 mkSphericalCow''' name' age' weight' =
-  join . fmap weightCheck $ -- do notation seems cleaner
+  weightCheck =<<
         Cow <$> noEmpty name'
         <*> noNegative age'
         <*> noNegative weight'
